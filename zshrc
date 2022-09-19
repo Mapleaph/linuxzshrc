@@ -69,9 +69,7 @@ export UPDATE_ZSH_DAYS=1
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git common-aliases osx tig zsh-autosuggestions)
 
-source $ZSH/oh-my-zsh.sh
-
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
@@ -117,13 +115,6 @@ alias cfm='export http_proxy=http://127.0.0.1:7890;export https_proxy=http://127
 alias sfm='export http_proxy=http://127.0.0.1:6152;export https_proxy=http://127.0.0.1:6152'
 alias dp='unset http_proxy; unset https_proxy'
 
-alias upgradebrew='brew update && brew upgrade'
-# this command should be disabled, you can upgrade applications when you open it, this is more safe.
-alias upgradebrewcask="brew outdated --cask | awk '{print $1}' | xargs brew cask install --force"
-alias upgradebrews="upgradebrew;upgradebrewcask;brew cleanup"
-
-alias emacs="$(brew --prefix emacs)/Emacs.app/Contents/MacOS/Emacs -nw"
-
 alias pullallsubmodules="git submodule foreach git pull origin master"
 
 alias gg='git log --oneline --abbrev-commit --all --graph --decorate --color'
@@ -132,11 +123,6 @@ alias smi='git submodule update --init --recursive && git submodule foreach git 
 
 alias graph1='git log --all --decorate --oneline --graph'
 alias graph='git log --all --decorate --graph'
-
-
-export BREW_PATH=$PATH
-alias porten='export PATH=/opt/local/bin:$PATH'
-alias brewen='export PATH=$BREW_PATH'
 
 alias docker_rm_all_containers="docker ps -a | awk '{if(NR>1)print $1}' | xargs -n 1 docker container rm $1"
 
@@ -169,27 +155,6 @@ export PATH="$(npm get prefix)/bin/:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Configuration for pyenv, make sure this is the last line.
-eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
-
-export HOMEBREW_NO_GITHUB_API=1
-
-# import vmware's command line control commands
-#export PATH="$PATH:/Applications/VMware\ Fusion.app/Contents/Library"
-
-# go
-#export PATH=$PATH:$(brew --prefix go)/libexec/bin
-
-# tomcat
-#CATALINA_HOME="$(brew --prefix tomcat)/libexec"
-#CATALINA_BASE=$CATALINA_HOME
-
-# for jhbuild
-#MIN_PATH=/usr/bin:/bin:/usr/sbin:/sbin
-#alias GTK_PATH="export PATH=$HOME/gtk/inst/bin:$MIN_PATH"
-#alias LOCAL_PATH="export PATH=/System/Library/Frameworks/Python.framework/Versions/Current/bin:$MIN_PATH"
-#alias nsqlite3="/usr/local/opt/sqlite/bin/sqlite3"
 
 # Configuration for spaceship theme
 SPACESHIP_TIME_SHOW=true
@@ -197,25 +162,11 @@ SPACESHIP_TIME_SHOW=true
 # Configuration for powerlevel9k
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 
-source ~/perl5/perlbrew/etc/bashrc
-
 # hstr added
 alias hh=hstr
 export HISTFILE=~/.zsh_history
 export HSTR_CONFIG=hicolor
 bindkey -s "\C-r" "\eqhstr --\n"
 
-# dhcp server
-alias dhcpd_start="sudo /bin/launchctl load -w /System/Library/LaunchDaemons/bootps.plist"
-alias dhcpd_stop="sudo /bin/launchctl unload -w /System/Library/LaunchDaemons/bootps.plist"
-
-source $HOME/.zz/z.sh
-
-# heroku autocomplete setup
-#HEROKU_AC_ZSH_SETUP_PATH=/Users/wukai/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
-
 alias vim=nvim
 export EDITOR=nvim
-
-alias start_tftp_server="sudo launchctl load -F /System/Library/LaunchDaemons/tftp.plist && sudo launchctl start com.apple.tftpd"
-alias stop_tftp_server="sudo launchctl stop com.apple.tftpd && sudo launchctl unload /System/Library/LaunchDaemons/tftp.plist"
